@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitality Procedures & Recipes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./images/Screenshot_20250507-180827.png') no-repeat center center/cover;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--secondary-color);
+        }
+
+        .external-link {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .external-link:hover {
+            background-color: var(--secondary-color);
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            padding: 0 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Procedures Section */
+        .procedure-categories {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--light-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .procedures-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .procedure-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .procedure-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .procedure-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .procedure-category {
+            background-color: var(--accent-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .procedure-body {
+            padding: 1rem;
+        }
+
+        .procedure-body h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .procedure-body p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .view-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .view-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Recipes Section */
+        .recipe-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .recipe-filters select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            min-width: 200px;
+        }
+
+        .recipes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .recipe-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .recipe-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .recipe-card:hover .recipe-img img {
+            transform: scale(1.05);
+        }
+
+        .recipe-info {
+            padding: 1rem;
+        }
+
+        .recipe-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .recipe-difficulty {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .difficulty-easy {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty-medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty-hard {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .recipe-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Ingredients Section */
+        .ingredient-filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--light-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .ingredients-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ingredient-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .ingredient-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .ingredient-img {
+            height: 150px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ingredient-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .ingredient-info {
+            padding: 1rem;
+            padding-top: 0;
+        }
+
+        .ingredient-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .ingredient-type {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .type-vegetables {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .type-fruits {
+            background-color: #ffe8cc;
+            color: #fd7e14;
+        }
+
+        .type-meat {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .type-dairy {
+            background-color: #e7f5ff;
+            color: #1864ab;
+        }
+
+        .type-spices {
+            background-color: #f3d9fa;
+            color: #862e9c;
+        }
+
+        /* Serving Procedures Section */
+        .serving-categories {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .serving-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .serving-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .serving-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .serving-header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem;
+        }
+
+        .serving-body {
+            padding: 1rem;
+        }
+
+        .serving-body h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .serving-body p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Glossary Section */
+        .glossary-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .glossary-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .glossary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .glossary-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .glossary-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .glossary-category {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: var(--light-color);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--dark-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+         background:white;
+            margin: 2rem auto;
+            max-width: 800px;
+        
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--secondary-color);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-header h2 {
+            color: var(--primary-color);
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .modal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ingredients-list, .steps-list {
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredients-list h3, .steps-list h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .ingredients-list ul, .steps-list ol {
+            padding-left: 1.5rem;
+        }
+
+        .ingredients-list li, .steps-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding-bottom: 5rem;
+            }
+            
+            .external-link {
+                top: auto;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .procedures-container, .recipes-container, .ingredients-container, 
+            .serving-container, .glossary-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+        }
+        a1{text-decoration:none;
+        color:white;
+        padding:4px;
+        border-radius:100%;
+        background-color:#FFB300;
+        font-size:1.2rem;
+        font-weight:bolder;
+        }
+           a1:hover, nav a.active {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+            <h3>DAXTON AND PEARL</h3>
+            <h1>Hospitality Procedures</h1>
+            
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active" data-section="procedures">Procedures</a></li>
+                <li><a href="#" data-section="recipes">Recipes</a></li>
+                <li><a href="#" data-section="serving">Serving</a></li>
+                <li><a href="#" data-section="ingredients">Ingredients</a></li>
+                <li><a href="#" data-section="glossary">Glossary</a></li>
+            </ul>
+        </nav>
+        <a href="https://www.example.com" class="external-link" target="_blank">
+            <i class="fas fa-external-link-alt"></i> More Resources</a>
+<a1 href="">About</a1>
+    
+
+    </header>
+
+    <main>
+        <!-- Procedures Section -->
+        <section id="procedures" class="content-section active">
+            <h2>Standard Operating Procedures</h2>
+            <div class="search-box">
+                <input type="text" id="procedure-search" placeholder="Search procedures...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="procedure-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="front-desk">Front Desk</button>
+                <button class="category-btn" data-category="housekeeping">Housekeeping</button>
+                <button class="category-btn" data-category="food-beverage">Food & Beverage</button>
+                <button class="category-btn" data-category="maintenance">Maintenance</button>
+            </div>
+            <div class="procedures-container" id="procedures-container">
+                <!-- Procedures will be loaded here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Recipes Section -->
+        <section id="recipes" class="content-section">
+            <h2>Recipe Collection</h2>
+            <div class="search-box">
+                <input type="text" id="recipe-search" placeholder="Search recipes...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="recipe-filters">
+                <select id="recipe-category">
+                    <option value="all">All Categories</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="beverage">Beverage</option>
+                </select>
+                <select id="recipe-difficulty">
+                    <option value="all">All Difficulties</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="recipes-container" id="recipes-container">
+                <!-- Recipes will be loaded here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Serving Procedures Section -->
+        <section id="serving" class="content-section">
+            <h2>Serving Procedures</h2>
+            <div class="search-box">
+                <input type="text" id="serving-search" placeholder="Search serving procedures...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="serving-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="fine-dining">Fine Dining</button>
+                <button class="category-btn" data-category="buffet">Buffet</button>
+                <button class="category-btn" data-category="room-service">Room Service</button>
+                <button class="category-btn" data-category="bar">Bar Service</button>
+            </div>
+            <div class="serving-container" id="serving-container">
+                <!-- Serving procedures will be loaded here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Ingredients Section -->
+        <section id="ingredients" class="content-section">
+            <h2>Ingredient Gallery</h2>
+            <div class="search-box">
+                <input type="text" id="ingredient-search" placeholder="Search ingredients...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="ingredient-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="vegetables">Vegetables</button>
+                <button class="filter-btn" data-filter="fruits">Fruits</button>
+                <button class="filter-btn" data-filter="meat">Meat</button>
+                <button class="filter-btn" data-filter="dairy">Dairy</button>
+                <button class="filter-btn" data-filter="spices">Spices</button>
+            </div>
+            <div class="ingredients-container" id="ingredients-container">
+                <!-- Ingredients will be loaded here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Glossary Section -->
+        <section id="glossary" class="content-section">
+            <h2>Hospitality Glossary</h2>
+            <div class="search-box">
+                <input type="text" id="glossary-search" placeholder="Search terms...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="glossary-container" id="glossary-container">
+                <!-- Terms will be loaded here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for detailed view -->
+    <div class="modal" id="detail-modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body" id="modal-body">
+                <!-- Content will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation between sections
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('.content-section');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked link and corresponding section
+                    this.classList.add('active');
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+            
+            // Modal functionality
+            const modal = document.getElementById('detail-modal');
+            const closeBtn = document.querySelector('.close-btn');
+            const modalBody = document.getElementById('modal-body');
+            
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Sample data
+            const proceduresData = [
+                {
+                    id: 1,
+                    title: 'Guest Check-in Procedure',
+                    description: 'Standard operating procedure for checking in guests at the front desk.',
+                    category: 'front-desk',
+                    steps: [
+                        'Greet the guest with a smile and welcome them to the property',
+                        'Request the guest\'s name and reservation details',
+                        'Verify identification and payment method',
+                        'Explain hotel amenities and policies',
+                        'Provide room keys and directions to the room',
+                        'Offer assistance with luggage if needed',
+                        'Wish the guest a pleasant stay'
+                    ]
+                },
+                {
+                    id: 2,
+                    title: 'Room Cleaning Protocol',
+                    description: 'Step-by-step guide for housekeeping staff to clean guest rooms.',
+                    category: 'housekeeping',
+                    steps: [
+                        'Knock and announce yourself before entering',
+                        'Open curtains and windows to air out the room',
+                        'Strip the bed and gather used linens',
+                        'Clean all surfaces starting from top to bottom',
+                        'Disinfect high-touch areas',
+                        'Make the bed with fresh linens',
+                        'Vacuum or mop the floor',
+                        'Restock amenities',
+                        'Do a final inspection before leaving'
+                    ]
+                },
+                {
+                    id: 3,
+                    title: 'Table Setting Standards',
+                    description: 'Proper table setting for fine dining service.',
+                    category: 'food-beverage',
+                    steps: [
+                        'Place clean, pressed tablecloth on the table',
+                        'Set dinner plate in the center',
+                        'Place forks to the left, knives and spoons to the right',
+                        'Set water glass above the knives',
+                        'Place wine glasses to the right of the water glass',
+                        'Fold napkin and place to the left of forks or on the plate',
+                        'Ensure all utensils are properly aligned and spaced'
+                    ]
+                },
+                {
+                    id: 4,
+                    title: 'Emergency Power Procedure',
+                    description: 'Steps to follow during a power outage.',
+                    category: 'maintenance',
+                    steps: [
+                        'Remain calm and reassure guests',
+                        'Activate emergency lighting if not automatic',
+                        'Contact utility company to report outage',
+                        'Deploy flashlights to key areas',
+                        'Monitor generator if available',
+                        'Assist guests with special needs',
+                        'Keep communication lines open with staff',
+                        'Document the incident for records'
+                    ]
+                },
+                {
+                    id: 5,
+                    title: 'Pool Maintenance Checklist',
+                    description: 'Daily maintenance tasks for the swimming pool area.',
+                    category: 'maintenance',
+                    steps: [
+                        'Test and adjust water chemistry',
+                        'Skim surface for debris',
+                        'Vacuum pool floor',
+                        'Clean pool tiles and edges',
+                        'Check and clean filters',
+                        'Inspect safety equipment',
+                        'Ensure proper chemical storage',
+                        'Document maintenance activities'
+                    ]
+                },
+                {
+                    id: 6,
+                    title: 'VIP Guest Handling',
+                    description: 'Special procedures for welcoming and servicing VIP guests.',
+                    category: 'front-desk',
+                    steps: [
+                        'Review VIP profile and preferences before arrival',
+                        'Prepare welcome amenities according to preferences',
+                        'Assign best available room and ensure perfect condition',
+                        'Personalized check-in in room or private area',
+                        'Introduce dedicated concierge contact',
+                        'Follow up within 1 hour of arrival to ensure satisfaction',
+                        'Coordinate all services to exceed expectations'
+                    ]
+                },
+                {
+                    id: 7,
+                    title: 'Wine Service Protocol',
+                    description: 'Proper procedure for serving wine in fine dining.',
+                    category: 'food-beverage',
+                    steps: [
+                        'Present bottle to host with label visible',
+                        'Announce wine name, vintage, and producer clearly',
+                        'Open bottle cleanly using proper corkscrew',
+                        'Place cork neatly to right of host',
+                        'Pour small taste for host approval',
+                        'Serve ladies first, then gentlemen, host last',
+                        'Fill glasses only to widest point (never more than half full)',
+                        'Place bottle on table with label facing guests',
+                        'Check back after first few sips'
+                    ]
+                },
+                {
+                    id: 8,
+                    title: 'Lost and Found Process',
+                    description: 'Standardized process for handling lost items.',
+                    category: 'front-desk',
+                    steps: [
+                        'Document found item with description, location, date/time',
+                        'Store in secure lost and found area',
+                        'Log in lost and found register with contact details',
+                        'If guest inquires, check log and storage',
+                        'For identified owners, arrange return via mail or pickup',
+                        'After 90 days, donate unclaimed items to charity',
+                        'Maintain records for 6 months'
+                    ]
+                },
+                {
+                    id: 9,
+                    title: 'Kitchen Sanitation Checklist',
+                    description: 'Daily cleaning procedures for food safety.',
+                    category: 'food-beverage',
+                    steps: [
+                        'Wash all surfaces with approved sanitizer',
+                        'Clean and sanitize cutting boards between uses',
+                        'Maintain separate cleaning tools for different areas',
+                        'Check and record refrigerator temperatures',
+                        'Empty and clean grease traps',
+                        'Dispose of waste properly throughout shift',
+                        'Deep clean equipment according to schedule',
+                        'Store chemicals separately from food items'
+                    ]
+                },
+                {
+                    id: 10,
+                    title: 'Emergency Evacuation Procedure',
+                    description: 'Staff responsibilities during emergency evacuations.',
+                    category: 'maintenance',
+                    steps: [
+                        'Remain calm and follow emergency plan',
+                        'Activate nearest fire alarm if needed',
+                        'Guide guests to nearest emergency exits',
+                        'Check assigned rooms/areas for stragglers',
+                        'Assist disabled guests as needed',
+                        'Gather at designated assembly point',
+                        'Account for all staff and report to manager',
+                        'Do not re-enter until all-clear given'
+                    ]
+                }
+            ];
+            
+            const recipesData = [
+                {
+                    id: 1,
+                    name: 'Classic Eggs Benedict',
+                    category: 'breakfast',
+                    difficulty: 'medium',
+                    time: '30 mins',
+                    servings: 2,
+                    description: 'A brunch classic featuring poached eggs and Canadian bacon on English muffins topped with hollandaise sauce.',
+                    ingredients: [
+                        '2 English muffins, split',
+                        '4 slices Canadian bacon',
+                        '4 large eggs',
+                        '2 tsp white vinegar',
+                        '1 tbsp butter',
+                        'Salt and pepper to taste',
+                        'Chopped parsley for garnish',
+                        'For hollandaise: 3 egg yolks, 1 tbsp lemon juice, 1/2 cup melted butter, pinch of cayenne'
+                    ],
+                    instructions: [
+                        'Toast English muffins and keep warm',
+                        'Brown Canadian bacon in a skillet and keep warm',
+                        'Poach eggs in simmering water with vinegar for 3-4 minutes',
+                        'For hollandaise: Whisk yolks and lemon juice over double boiler until thickened',
+                        'Slowly whisk in melted butter until sauce is creamy',
+                        'Season with salt, pepper, and cayenne',
+                        'Assemble: muffin half, bacon, poached egg, hollandaise',
+                        'Garnish with parsley and serve immediately'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 2,
+                    name: 'Beef Wellington',
+                    category: 'dinner',
+                    difficulty: 'hard',
+                    time: '2 hours',
+                    servings: 4,
+                    description: 'An elegant dish featuring beef tenderloin wrapped in puff pastry with mushroom duxelles and prosciutto.',
+                    ingredients: [
+                        '1.5 lb beef tenderloin',
+                        'Salt and pepper to taste',
+                        '2 tbsp olive oil',
+                        '8 oz mushrooms, finely chopped',
+                        '2 shallots, minced',
+                        '2 cloves garlic, minced',
+                        '2 tbsp butter',
+                        '6 slices prosciutto',
+                        '1 sheet puff pastry',
+                        '1 egg, beaten',
+                        'Dijon mustard for brushing'
+                    ],
+                    instructions: [
+                        'Season beef and sear in hot oil on all sides, then cool',
+                        'Sauté mushrooms, shallots, and garlic in butter until dry',
+                        'Lay out prosciutto slices on plastic wrap, spread with mushroom mixture',
+                        'Place beef on top and wrap tightly, chill for 30 minutes',
+                        'Roll out pastry, wrap around beef, seal edges',
+                        'Brush with egg wash and score decoratively',
+                        'Bake at 425°F for 35-40 minutes until golden',
+                        'Rest for 10 minutes before slicing'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 3,
+                    name: 'Chocolate Lava Cake',
+                    category: 'dessert',
+                    difficulty: 'medium',
+                    time: '25 mins',
+                    servings: 4,
+                    description: 'Decadent individual chocolate cakes with a molten center, perfect with vanilla ice cream.',
+                    ingredients: [
+                        '4 oz bittersweet chocolate',
+                        '1/2 cup butter',
+                        '1 cup powdered sugar',
+                        '2 eggs',
+                        '2 egg yolks',
+                        '1 tsp vanilla extract',
+                        '1/2 cup all-purpose flour',
+                        'Pinch of salt',
+                        'Butter and cocoa powder for ramekins'
+                    ],
+                    instructions: [
+                        'Preheat oven to 425°F and prepare ramekins',
+                        'Melt chocolate and butter together, stir until smooth',
+                        'Whisk in sugar, then eggs and yolks one at a time',
+                        'Stir in vanilla, then fold in flour and salt',
+                        'Divide batter among ramekins',
+                        'Bake for 12-14 minutes until edges are set but center is soft',
+                        'Let sit for 1 minute, then invert onto plates',
+                        'Serve immediately with ice cream or berries'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1564355808539-22fda35bed7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 4,
+                    name: 'Caesar Salad',
+                    category: 'lunch',
+                    difficulty: 'easy',
+                    time: '15 mins',
+                    servings: 4,
+                    description: 'Classic Caesar salad with homemade dressing, croutons, and Parmesan cheese.',
+                    ingredients: [
+                        '1 large romaine lettuce, chopped',
+                        '1/2 cup grated Parmesan',
+                        '1 cup croutons',
+                        'For dressing: 1 egg yolk, 2 cloves garlic, 2 anchovies, 1 tbsp Dijon, 1 tbsp lemon juice, 1/4 cup olive oil, salt and pepper',
+                        'Optional: grilled chicken or shrimp'
+                    ],
+                    instructions: [
+                        'Wash and dry lettuce thoroughly',
+                        'Make dressing: blend yolk, garlic, anchovies, Dijon, and lemon',
+                        'Slowly drizzle in oil while blending until emulsified',
+                        'Season with salt and pepper',
+                        'Toss lettuce with dressing, croutons, and most of the cheese',
+                        'Plate and top with remaining cheese',
+                        'Add protein if desired'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1546793665-b746449e718c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 5,
+                    name: 'French Onion Soup',
+                    category: 'lunch',
+                    difficulty: 'medium',
+                    time: '1 hour 15 mins',
+                    servings: 6,
+                    description: 'Classic French soup with caramelized onions, beef broth, and cheesy crouton topping.',
+                    ingredients: [
+                        '6 large yellow onions, thinly sliced',
+                        '4 tbsp butter',
+                        '1 tbsp olive oil',
+                        '1 tsp sugar',
+                        '1/2 cup dry white wine',
+                        '8 cups beef stock',
+                        '2 tbsp all-purpose flour',
+                        '1 bay leaf',
+                        '1/2 tsp dried thyme',
+                        'Salt and pepper to taste',
+                        '1 baguette, sliced',
+                        '2 cups grated Gruyère cheese'
+                    ],
+                    instructions: [
+                        'Melt butter with oil in large pot over medium heat',
+                        'Add onions and cook slowly for 45 minutes until caramelized',
+                        'Sprinkle sugar to help caramelization',
+                        'Add flour and cook for 1 minute',
+                        'Deglaze with wine, scraping browned bits',
+                        'Add stock, bay leaf, and thyme',
+                        'Simmer for 30 minutes, season to taste',
+                        'Toast baguette slices',
+                        'Ladle soup into ovenproof bowls, top with toast and cheese',
+                        'Broil until cheese is bubbly and golden'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1513535447231-cf1d4f949a5a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 6,
+                    name: 'Tiramisu',
+                    category: 'dessert',
+                    difficulty: 'medium',
+                    time: '40 mins + chilling',
+                    servings: 8,
+                    description: 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.',
+                    ingredients: [
+                        '6 egg yolks',
+                        '3/4 cup sugar',
+                        '2/3 cup milk',
+                        '1 1/4 cups heavy cream',
+                        '16 oz mascarpone cheese',
+                        '1 3/4 cups strong coffee, cooled',
+                        '2 tbsp rum or coffee liqueur',
+                        '24 ladyfinger cookies',
+                        'Cocoa powder for dusting'
+                    ],
+                    instructions: [
+                        'Whisk yolks and sugar over double boiler until pale and thick',
+                        'Remove from heat, whisk in milk, then cool completely',
+                        'Whip cream to stiff peaks',
+                        'Fold mascarpone into yolk mixture, then fold in whipped cream',
+                        'Combine coffee and liqueur in shallow dish',
+                        'Quickly dip ladyfingers in coffee mixture',
+                        'Layer half in dish, spread with half of cream',
+                        'Repeat layers',
+                        'Chill at least 6 hours, preferably overnight',
+                        'Dust with cocoa before serving'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 7,
+                    name: 'Margherita Pizza',
+                    category: 'dinner',
+                    difficulty: 'medium',
+                    time: '1 hour',
+                    servings: 4,
+                    description: 'Classic Neapolitan pizza with simple, fresh ingredients.',
+                    ingredients: [
+                        '1 lb pizza dough',
+                        '1/2 cup tomato sauce',
+                        '8 oz fresh mozzarella, sliced',
+                        'Fresh basil leaves',
+                        '2 tbsp olive oil',
+                        'Salt to taste',
+                        'Cornmeal for dusting'
+                    ],
+                    instructions: [
+                        'Preheat oven and pizza stone to 500°F for 1 hour',
+                        'Stretch dough to 12-inch round on cornmeal-dusted peel',
+                        'Spread thin layer of sauce, leaving border',
+                        'Arrange mozzarella evenly',
+                        'Bake for 10-12 minutes until crust is golden',
+                        'Remove from oven, top with fresh basil',
+                        'Drizzle with olive oil and salt',
+                        'Let rest 2 minutes before slicing'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 8,
+                    name: 'Pancakes with Maple Syrup',
+                    category: 'breakfast',
+                    difficulty: 'easy',
+                    time: '25 mins',
+                    servings: 4,
+                    description: 'Fluffy homemade pancakes perfect for weekend brunch.',
+                    ingredients: [
+                        '1 1/2 cups all-purpose flour',
+                        '3 1/2 tsp baking powder',
+                        '1 tbsp sugar',
+                        '1 tsp salt',
+                        '1 1/4 cups milk',
+                        '1 egg',
+                        '3 tbsp melted butter',
+                        '1 tsp vanilla extract',
+                        'Butter and maple syrup for serving'
+                    ],
+                    instructions: [
+                        'Whisk dry ingredients in large bowl',
+                        'In another bowl, beat milk, egg, butter and vanilla',
+                        'Pour wet into dry, mix until just combined (some lumps okay)',
+                        'Heat griddle over medium, lightly grease',
+                        'Pour 1/4 cup batter per pancake',
+                        'Cook until bubbles form and edges look dry',
+                        'Flip and cook until golden',
+                        'Serve warm with butter and syrup'
+                    ],
+                    image: 'https://images.unsplash.com/photo-1554520735-0a6b8b6ce8b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                }
+            ];
+            
+            const servingData = [
+                {
+                    id: 1,
+                    title: 'Fine Dining Service Sequence',
+                    description: 'Standard sequence for serving courses in fine dining establishments.',
+                    category: 'fine-dining',
+                    steps: [
+                        'Greet guests within 30 seconds of seating',
+                        'Present menus and explain specials',
+                        'Take beverage order and serve within 3 minutes',
+                        'Present wine list and take order if requested',
+                        'Serve bread and butter',
+                        'Take food order after beverages are served',
+                        'Serve appetizers within 10 minutes of ordering',
+                        'Clear appetizer plates after all guests finish',
+                        'Serve main courses simultaneously to all guests',
+                        'Check back after 2-3 bites for satisfaction',
+                        'Clear main plates after all finish',
+                        'Present dessert menu and take order',
+                        'Serve desserts with appropriate utensils',
+                        'Present check only when requested',
+                        'Thank guests sincerely upon departure'
+                    ]
+                },
+                {
+                    id: 2,
+                    title: 'Buffet Service Standards',
+                    description: 'Procedures for maintaining and serving buffet stations.',
+                    category: 'buffet',
+                    steps: [
+                        'Set up buffet line with logical flow (plates first, desserts last)',
+                        'Maintain food at proper temperatures (hot foods above 140°F, cold below 40°F)',
+                        'Label all dishes clearly with name and allergen information',
+                        'Keep serving utensils in each dish with handles extending out',
+                        'Monitor buffet continuously for replenishment needs',
+                        'Replace empty dishes immediately',
+                        'Keep area clean and free of spills',
+                        'Assist guests with special requests',
+                        'Rotate food to ensure freshness',
+                        'Clear used plates promptly from dining area'
+                    ]
+                },
+                {
+                    id: 3,
+                    title: 'Room Service Delivery',
+                    description: 'Protocol for delivering food to guest rooms.',
+                    category: 'room-service',
+                    steps: [
+                        'Confirm order details before leaving kitchen',
+                        'Place items securely on tray with covers',
+                        'Knock or ring bell and announce "Room Service"',
+                        'Wait at least 15 seconds before second attempt',
+                        'Greet guest by name if possible',
+                        'Ask permission to enter room',
+                        'Set up table or tray where guest indicates',
+                        'Present check for signature if required',
+                        'Explain dishes if requested',
+                        'Offer to open wine or make other preparations',
+                        'Ask if anything else is needed before leaving',
+                        'Thank guest and give estimated return time for pickup',
+                        'Record delivery time on ticket'
+                    ]
+                },
+                {
+                    id: 4,
+                    title: 'Cocktail Service Protocol',
+                    description: 'Proper procedure for serving alcoholic beverages.',
+                    category: 'bar',
+                    steps: [
+                        'Verify guest is of legal drinking age if in doubt',
+                        'Take order using standard sequence (liquor first, then mixer, then garnish)',
+                        'Repeat order back to guest for confirmation',
+                        'Prepare drink using proper measurements and techniques',
+                        'Use clean glassware for each drink',
+                        'Place cocktail napkin before serving drink',
+                        'Serve drinks from the right when possible',
+                        'Announce drink when placing it',
+                        'Check back after first sip for satisfaction',
+                        'Monitor guest alcohol consumption',
+                        'Offer water between alcoholic drinks',
+                        'Know when to refuse service responsibly'
+                    ]
+                }
+            ];
+            
+            const ingredientsData = [
+                {
+                    id: 1,
+                    name: 'Tomato',
+                    type: 'vegetables',
+                    description: 'A red, juicy fruit commonly used as a vegetable in cooking.',
+                    image: 'https://images.unsplash.com/photo-1592841200221-a6895fdfa0a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 2,
+                    name: 'Chicken Breast',
+                    type: 'meat',
+                    description: 'Lean, boneless cut of chicken, versatile for many dishes.',
+                    image: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 3,
+                    name: 'Basil',
+                    type: 'spices',
+                    description: 'Fragrant herb essential for Italian cuisine, especially pesto and caprese.',
+                    image: 'https://images.unsplash.com/photo-1603651653345-9af5702330d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 4,
+                    name: 'Mozzarella Cheese',
+                    type: 'dairy',
+                    description: 'Soft, white cheese that melts well, perfect for pizzas and salads.',
+                    image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 5,
+                    name: 'Strawberries',
+                    type: 'fruits',
+                    description: 'Sweet, red berries perfect for desserts or eaten fresh.',
+                    image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 6,
+                    name: 'Eggs',
+                    type: 'dairy',
+                    description: 'Versatile ingredient used in baking, breakfast dishes, and more.',
+                    image: 'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 7,
+                    name: 'Garlic',
+                    type: 'vegetables',
+                    description: 'Pungent bulb used to flavor countless dishes worldwide.',
+                    image: 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 8,
+                    name: 'Salmon Fillet',
+                    type: 'meat',
+                    description: 'Oily fish rich in omega-3s, excellent grilled or baked.',
+                    image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 9,
+                    name: 'Parmesan Cheese',
+                    type: 'dairy',
+                    description: 'Hard, granular cheese with strong flavor, perfect for grating over pasta.',
+                    image: 'https://images.unsplash.com/photo-1602542165989-999c53234fdd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 10,
+                    name: 'Fresh Basil',
+                    type: 'vegetables',
+                    description: 'Fragrant herb essential for Italian cuisine, especially pesto and caprese.',
+                    image: 'https://images.unsplash.com/photo-1603651653345-9af5702330d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 11,
+                    name: 'Beef Tenderloin',
+                    type: 'meat',
+                    description: 'Premium cut of beef, very tender with minimal fat, perfect for special occasions.',
+                    image: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 12,
+                    name: 'Ladyfinger Cookies',
+                    type: 'dairy',
+                    description: 'Light, dry sponge cakes used in desserts like tiramisu and charlottes.',
+                    image: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 13,
+                    name: 'Mascarpone Cheese',
+                    type: 'dairy',
+                    description: 'Italian cream cheese with rich, buttery texture, essential for tiramisu.',
+                    image: 'https://images.unsplash.com/photo-1625943555413-5a4a0c8c65b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 14,
+                    name: 'Yellow Onions',
+                    type: 'vegetables',
+                    description: 'All-purpose onions with balanced flavor, perfect for cooking and caramelizing.',
+                    image: 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 15,
+                    name: 'Gruyère Cheese',
+                    type: 'dairy',
+                    description: 'Swiss cheese with excellent melting properties, perfect for fondue and gratins.',
+                    image: 'https://images.unsplash.com/photo-1611250503129-9a59b6b2a593?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    id: 16,
+                    name: 'Baguette',
+                    type: 'dairy',
+                    description: 'French bread with crisp crust and soft interior, ideal for sandwiches and soups.',
+                    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+                }
+            ];
+            
+            const glossaryData = [
+                {
+                    term: 'Mise en Place',
+                    definition: 'French for "everything in its place." The preparation and organization of ingredients and equipment before cooking begins.',
+                    category: 'culinary'
+                },
+                {
+                    term: 'ADR (Average Daily Rate)',
+                    definition: 'A key hospitality metric calculated by dividing rooms revenue by rooms sold.',
+                    category: 'front-office'
+                },
+                {
+                    term: 'Yield Management',
+                    definition: 'Revenue optimization strategy to maximize profits by adjusting prices based on demand.',
+                    category: 'management'
+                },
+                {
+                    term: 'Duvet',
+                    definition: 'A type of bedding consisting of a soft flat bag filled with down or synthetic fiber.',
+                    category: 'housekeeping'
+                },
+                {
+                    term: 'Sous Vide',
+                    definition: 'Cooking technique where food is vacuum-sealed and cooked in precisely controlled water baths.',
+                    category: 'culinary'
+                },
+                {
+                    term: 'Upselling',
+                    definition: 'Sales technique where staff encourage guests to purchase more expensive items or upgrades.',
+                    category: 'sales'
+                },
+                {
+                    term: 'Concierge',
+                    definition: 'Hotel staff member who assists guests with various services like reservations and recommendations.',
+                    category: 'guest-services'
+                },
+                {
+                    term: 'Amuse-Bouche',
+                    definition: 'A small, complimentary appetizer offered in fine dining restaurants before the meal begins.',
+                    category: 'culinary'
+                },
+                {
+                    term: 'FIFO',
+                    definition: 'First In, First Out - inventory rotation system to ensure oldest products are used first.',
+                    category: 'culinary'
+                },
+                {
+                    term: 'RevPAR',
+                    definition: 'Revenue Per Available Room - key performance metric calculated by multiplying ADR by occupancy rate.',
+                    category: 'management'
+                }
+            ];
+            
+            // Render procedures
+            function renderProcedures(category = 'all') {
+                const container = document.getElementById('procedures-container');
+                container.innerHTML = '';
+                
+                const filteredProcedures = category === 'all' 
+                    ? proceduresData 
+                    : proceduresData.filter(p => p.category === category);
+                    
+                if (filteredProcedures.length === 0) {
+                    container.innerHTML = '<p>No procedures found in this category.</p>';
+                    return;
+                }
+                
+                filteredProcedures.forEach(procedure => {
+                    const card = document.createElement('div');
+                    card.className = 'procedure-card';
+                    
+                    const categoryMap = {
+                        'front-desk': 'Front Desk',
+                        'housekeeping': 'Housekeeping',
+                        'food-beverage': 'Food & Beverage',
+                        'maintenance': 'Maintenance'
+                    };
+                    
+                    card.innerHTML = `
+                        <div class="procedure-header">
+                            <span class="procedure-category">${categoryMap[procedure.category]}</span>
+                        </div>
+                        <div class="procedure-body">
+                            <h3>${procedure.title}</h3>
+                            <p>${procedure.description}</p>
+                            <button class="view-btn" data-id="${procedure.id}" data-type="procedure">View Details</button>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-btn[data-type="procedure"]').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.getAttribute('data-id'));
+                        showProcedureDetails(id);
+                    });
+                });
+            }
+            
+            // Render serving procedures
+            function renderServingProcedures(category = 'all') {
+                const container = document.getElementById('serving-container');
+                container.innerHTML = '';
+                
+                const filteredProcedures = category === 'all' 
+                    ? servingData 
+                    : servingData.filter(p => p.category === category);
+                    
+                if (filteredProcedures.length === 0) {
+                    container.innerHTML = '<p>No serving procedures found in this category.</p>';
+                    return;
+                }
+                
+                filteredProcedures.forEach(procedure => {
+                    const card = document.createElement('div');
+                    card.className = 'serving-card';
+                    
+                    const categoryMap = {
+                        'fine-dining': 'Fine Dining',
+                        'buffet': 'Buffet',
+                        'room-service': 'Room Service',
+                        'bar': 'Bar Service'
+                    };
+                    
+                    card.innerHTML = `
+                        <div class="serving-header">
+                            <h3>${procedure.title}</h3>
+                            <span class="procedure-category">${categoryMap[procedure.category]}</span>
+                        </div>
+                        <div class="serving-body">
+                            <p>${procedure.description}</p>
+                            <button class="view-btn" data-id="${procedure.id}" data-type="serving">View Details</button>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-btn[data-type="serving"]').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.getAttribute('data-id'));
+                        showServingDetails(id);
+                    });
+                });
+            }
+            
+            // Render recipes
+            function renderRecipes(category = 'all', difficulty = 'all') {
+                const container = document.getElementById('recipes-container');
+                container.innerHTML = '';
+                
+                const filteredRecipes = recipesData.filter(recipe => {
+                    return (category === 'all' || recipe.category === category) && 
+                           (difficulty === 'all' || recipe.difficulty === difficulty);
+                });
+                    
+                if (filteredRecipes.length === 0) {
+                    container.innerHTML = '<p>No recipes found matching your criteria.</p>';
+                    return;
+                }
+                
+                filteredRecipes.forEach(recipe => {
+                    const card = document.createElement('div');
+                    card.className = 'recipe-card';
+                    
+                    card.innerHTML = `
+                        <div class="recipe-img">
+                            <img src="${recipe.image}" alt="${recipe.name}">
+                        </div>
+                        <div class="recipe-info">
+                            <h3>${recipe.name}</h3>
+                            <div class="recipe-meta">
+                                <span>${recipe.time} • ${recipe.servings} servings</span>
+                                <span class="recipe-difficulty difficulty-${recipe.difficulty}">${recipe.difficulty.charAt(0).toUpperCase() + recipe.difficulty.slice(1)}</span>
+                            </div>
+                            <p class="recipe-description">${recipe.description}</p>
+                            <button class="view-btn" data-id="${recipe.id}" data-type="recipe">View Recipe</button>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-btn[data-type="recipe"]').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.getAttribute('data-id'));
+                        showRecipeDetails(id);
+                    });
+                });
+            }
+            
+            // Render ingredients
+            function renderIngredients(filter = 'all') {
+                const container = document.getElementById('ingredients-container');
+                container.innerHTML = '';
+                
+                const filteredIngredients = filter === 'all' 
+                    ? ingredientsData 
+                    : ingredientsData.filter(i => i.type === filter);
+                    
+                if (filteredIngredients.length === 0) {
+                    container.innerHTML = '<p>No ingredients found in this category.</p>';
+                    return;
+                }
+                
+                filteredIngredients.forEach(ingredient => {
+                    const card = document.createElement('div');
+                    card.className = 'ingredient-card';
+                    
+                    const typeMap = {
+                        'vegetables': 'Vegetable',
+                        'fruits': 'Fruit',
+                        'meat': 'Meat',
+                        'dairy': 'Dairy',
+                        'spices': 'Spice'
+                    };
+                    
+                    card.innerHTML = `
+                        <div class="ingredient-img">
+                            <img src="${ingredient.image}" alt="${ingredient.name}">
+                        </div>
+                        <div class="ingredient-info">
+                            <h3>${ingredient.name}</h3>
+                            <span class="ingredient-type type-${ingredient.type}">${typeMap[ingredient.type]}</span>
+                            <button class="view-btn" data-id="${ingredient.id}" data-type="ingredient">View Details</button>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+                
+                // Add event listeners to view buttons
+                document.querySelectorAll('.view-btn[data-type="ingredient"]').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.getAttribute('data-id'));
+                        showIngredientDetails(id);
+                    });
+                });
+            }
+            
+            // Render glossary
+            function renderGlossary() {
+                const container = document.getElementById('glossary-container');
+                container.innerHTML = '';
+                
+                glossaryData.forEach(term => {
+                    const card = document.createElement('div');
+                    card.className = 'glossary-card';
+                    
+                    card.innerHTML = `
+                        <h3>${term.term}</h3>
+                        <p>${term.definition}</p>
+                        <span class="glossary-category">${term.category}</span>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+            }
+            
+            // Show procedure details in modal
+            function showProcedureDetails(id) {
+                const procedure = proceduresData.find(p => p.id === id);
+                if (!procedure) return;
+                
+                const categoryMap = {
+                    'front-desk': 'Front Desk',
+                    'housekeeping': 'Housekeeping',
+                    'food-beverage': 'Food & Beverage',
+                    'maintenance': 'Maintenance'
+                };
+                
+                modalBody.innerHTML = `
+                    <div class="modal-header">
+                        <h2>${procedure.title}</h2>
+                        <span class="procedure-category">${categoryMap[procedure.category]}</span>
+                    </div>
+                    <p>${procedure.description}</p>
+                    <div class="steps-list">
+                        <h3>Procedure Steps</h3>
+                        <ol>
+                            ${procedure.steps.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+            }
+            
+            // Show serving procedure details in modal
+            function showServingDetails(id) {
+                const procedure = servingData.find(p => p.id === id);
+                if (!procedure) return;
+                
+                const categoryMap = {
+                    'fine-dining': 'Fine Dining',
+                    'buffet': 'Buffet',
+                    'room-service': 'Room Service',
+                    'bar': 'Bar Service'
+                };
+                
+                modalBody.innerHTML = `
+                    <div class="modal-header">
+                        <h2>${procedure.title}</h2>
+                        <span class="procedure-category">${categoryMap[procedure.category]}</span>
+                    </div>
+                    <p>${procedure.description}</p>
+                    <div class="steps-list">
+                        <h3>Serving Steps</h3>
+                        <ol>
+                            ${procedure.steps.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+            }
+            
+            // Show recipe details in modal
+            function showRecipeDetails(id) {
+                const recipe = recipesData.find(r => r.id === id);
+                if (!recipe) return;
+                
+                modalBody.innerHTML = `
+                    <div class="modal-header">
+                        <h2>${recipe.name}</h2>
+                        <div class="recipe-meta">
+                            <span>${recipe.time} • ${recipe.servings} servings • </span>
+                            <span class="recipe-difficulty difficulty-${recipe.difficulty}">${recipe.difficulty.charAt(0).toUpperCase() + recipe.difficulty.slice(1)}</span>
+                        </div>
+                    </div>
+                    <div class="modal-img">
+                        <img src="${recipe.image}" alt="${recipe.name}">
+                    </div>
+                    <p>${recipe.description}</p>
+                    <div class="ingredients-list">
+                        <h3>Ingredients</h3>
+                        <ul>
+                            ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="steps-list">
+                        <h3>Instructions</h3>
+                        <ol>
+                            ${recipe.instructions.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                `;
+                
+                modal.style.display = 'block';
+            }
+            
+            // Show ingredient details in modal
+            function showIngredientDetails(id) {
+                const ingredient = ingredientsData.find(i => i.id === id);
+                if (!ingredient) return;
+                
+                const typeMap = {
+                    'vegetables': 'Vegetable',
+                    'fruits': 'Fruit',
+                    'meat': 'Meat',
+                    'dairy': 'Dairy',
+                    'spices': 'Spice'
+                };
+                
+                modalBody.innerHTML = `
+                    <div class="modal-header">
+                        <h2>${ingredient.name}</h2>
+                        <span class="ingredient-type type-${ingredient.type}">${typeMap[ingredient.type]}</span>
+                    </div>
+                    <div class="modal-img">
+                        <img src="${ingredient.image}" alt="${ingredient.name}">
+                    </div>
+                    <p>${ingredient.description}</p>
+                `;
+                
+                modal.style.display = 'block';
+            }
+            
+            // Initialize the page
+            renderProcedures();
+            renderRecipes();
+            renderServingProcedures();
+            renderIngredients();
+            renderGlossary();
+            
+            // Procedure category filter
+            document.querySelectorAll('#procedures .category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#procedures .category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.getAttribute('data-category');
+                    renderProcedures(category);
+                });
+            });
+            
+            // Serving category filter
+            document.querySelectorAll('#serving .category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#serving .category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.getAttribute('data-category');
+                    renderServingProcedures(category);
+                });
+            });
+            
+            // Recipe filters
+            document.getElementById('recipe-category').addEventListener('change', function() {
+                const category = this.value;
+                const difficulty = document.getElementById('recipe-difficulty').value;
+                renderRecipes(category, difficulty);
+            });
+            
+            document.getElementById('recipe-difficulty').addEventListener('change', function() {
+                const difficulty = this.value;
+                const category = document.getElementById('recipe-category').value;
+                renderRecipes(category, difficulty);
+            });
+            
+            // Ingredient filters
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
+                    renderIngredients(filter);
+                });
+            });
+            
+            // Search functionality
+            document.getElementById('procedure-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.procedure-card');
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            document.getElementById('serving-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.serving-card');
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            document.getElementById('recipe-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.recipe-card');
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('.recipe-description').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            document.getElementById('ingredient-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.ingredient-card');
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            document.getElementById('glossary-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.glossary-card');
+                
+                cards.forEach(card => {
+                    const term = card.querySelector('h3').textContent.toLowerCase();
+                    const def = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (term.includes(searchTerm) || def.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
